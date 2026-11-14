@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cfl7otb32jqw6"]
+
+[ext_resource type="Script" uid="uid://d1ypnpmn3kjj4" path="res://player.gd" id="1_37kl0"]
+[ext_resource type="PackedScene" uid="uid://2sa2exewmlvx" path="res://source/Polaroid.glb" id="2_2dftf"]
+[ext_resource type="PackedScene" uid="uid://bpede1pk0yk0j" path="res://PolaroidHUD.tscn" id="3_bcbcq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4kxuq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4kxuq"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mti6b"]
+
+[node name="Node3D" type="Node3D" unique_id=649912729]
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=925130221]
+script = ExtResource("1_37kl0")
+speed = null
+jump_velocity = null
+mouse_sensitivity = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=540431914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_4kxuq")
+
+[node name="Head" type="Node3D" parent="Player" unique_id=787840377]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/Head" unique_id=117003419]
+
+[node name="Polaroid" parent="Player/Head/Camera3D" unique_id=1535742766 instance=ExtResource("2_2dftf")]
+transform = Transform3D(-0.095202155, 0, 0.030603105, 0, 0.1, 0, -0.030603105, 0, -0.095202155, 0, -0.23535168, -0.84214187)
+
+[node name="Plane" parent="Player/Head/Camera3D/Polaroid" index="0" unique_id=710134528]
+transform = Transform3D(0.9954902, 0.09486467, -9.313226e-10, -0.09468556, 0.9936113, -0.06140999, -0.0058256574, 0.061133042, 0.9981126, -5.1721954, 0.3467007, -2.3814998)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1253184238]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=786264349]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
+shape = SubResource("BoxShape3D_4kxuq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=409579385]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
+mesh = SubResource("BoxMesh_mti6b")
+
+[node name="PolaroidHUD" parent="." unique_id=200373615 instance=ExtResource("3_bcbcq")]
+
+[editable path="Player/Head/Camera3D/Polaroid"]
