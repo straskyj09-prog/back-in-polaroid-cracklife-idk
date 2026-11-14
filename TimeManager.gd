@@ -3,7 +3,7 @@ extends Node
 const TimeSnapshot = preload("res://TimeSnapshot.gd")
 
 var active_snapshots: Array[TimeSnapshot] = []
-const MAX_SNAPSHOTS: int = 5 # Limit how many Polaroids the player can hold/use
+const MAX_SNAPSHOTS: int = 5 
 
 func take_snapshot(player: Node3D, current_room_objects: Array) -> TimeSnapshot:
 	var snapshot = TimeSnapshot.new()
@@ -11,20 +11,18 @@ func take_snapshot(player: Node3D, current_room_objects: Array) -> TimeSnapshot:
 	snapshot.player_rotation = player.global_rotation
 	snapshot.timestamp = Time.get_unix_time_from_system()
 	
-	# Capture states of interactive objects
 	for obj in current_room_objects:
 		if obj.has_method("get_save_state"):
 			snapshot.object_states[obj.get_instance_id()] = obj.get_save_state()
 			
 	active_snapshots.append(snapshot)
 	if active_snapshots.size() > MAX_SNAPSHOTS:
-		active_snapshots.pop_front() # Remove the oldest Polaroid
+		active_snapshots.pop_front()
 		
 	print("Polaroid captured! Total snapshots: ", active_snapshots.size())
 	return snapshot
 
 func revert_to_snapshot(snapshot: TimeSnapshot, player: Node3D, current_room_objects: Array):
-	# Restore player
 	player.global_position = snapshot.player_position
 	player.global_rotation = snapshot.player_rotation
 	

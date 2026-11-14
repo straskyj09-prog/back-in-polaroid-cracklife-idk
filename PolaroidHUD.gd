@@ -9,7 +9,6 @@ func trigger_flash():
 	flash_rect.color = Color(1, 1, 1, 1)
 	
 	var tween = create_tween()
-	# Animate the alpha channel of the Color property directly
 	tween.tween_property(flash_rect, "color:a", 0.0, 0.35)
 
 func add_polaroid_to_hud(snapshot, player: Node3D, room_objects: Array):
@@ -25,7 +24,6 @@ func add_polaroid_to_hud(snapshot, player: Node3D, room_objects: Array):
 		
 	photo_strip.add_child(card)
 	
-	# Safely look for the texture display node inside the card
 	var texture_rect = card.get_node_or_null("MarginContainer/PhotoDisplay")
 	if texture_rect and snapshot.has("captured_texture"):
 		texture_rect.texture = snapshot.captured_texture
