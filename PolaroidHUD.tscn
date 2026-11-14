@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cddudebsogjjj"]
+
+[ext_resource type="Script" uid="uid://dlqqmas0yk16d" path="res://PolaroidHUD.gd" id="1_vl7ex"]
+
+[node name="PolaroidHUD" type="CanvasLayer" unique_id=806290453]
+script = ExtResource("1_vl7ex")
+
+[node name="Control" type="Control" parent="." unique_id=1128658839]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="FlashRect" type="ColorRect" parent="Control" unique_id=1520620765]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="PhotoStrip" type="HBoxContainer" parent="Control" unique_id=1218008734]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

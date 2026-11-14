@@ -6,20 +6,35 @@ extends CharacterBody3D
 
 @onready var head: Node3D = $Head
 
+@onready var hud = PolaroidHUD
+
+#mouse movement (DO NOT TOUCH)
 func _ready() -> void:
-	# Lock and hide the mouse cursor
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	pass
 
 func _unhandled_input(event: InputEvent) -> void:
-	# Rotate body left/right and head up/down with the mouse
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		head.rotate_x(-event.relative.y * mouse_sensitivity)
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 	
-	# Press Esc to unlock the mouse cursor
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		
+	if event.is_action_pressed("take_photo"):
+		print("SUCCESS: F key detected!")
+		take_polaroid_snapshot()
+
+func take_polaroid_snapshot() -> void:
+	var room_objects = get_tree().get_nodes_in_group("time_sensitive")
+	
+	var snapshot = TimeManager.take_snapshot(self, room_objects)
+	
+	if hud:
+		hud.add_polaroid_to_hud(snapshot, self, room_objects)
+	else:
+		print("Warning: PolaroidHUD singleton not found!")
 
 func _physics_process(delta: float) -> void:
 	# Add gravity

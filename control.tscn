@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bbd767r6o0tfw"]
+
+[ext_resource type="Script" uid="uid://dlqqmas0yk16d" path="res://PolaroidHUD.gd" id="1_0fbet"]
+
+[node name="PolaroidCard" type="Control" unique_id=200373615]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PolaroidHUD" type="CanvasLayer" parent="." unique_id=296594486]
+script = ExtResource("1_0fbet")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=666877908]
